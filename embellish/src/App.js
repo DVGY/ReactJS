@@ -4,22 +4,42 @@ import ShopPage from './pages/shop/ShopPage';
 import Navbar from './components/navbar/Navbar';
 import SignInAndOut from './pages/sign-in-up/SignInAndOut';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { auth } from './components/firebase/firebaseUtility';
 
 import './App.css';
-function App() {
-  return (
-    <Router>
-      <Navbar />
+class App extends React.Component {
+  constructor() {
+    super();
 
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-          <Route exact path="/shop" component={ShopPage} />
-          <Route exact path="/sign" component={SignInAndOut} />
-        </Switch>
-      </div>
-    </Router>
-  );
+    this.state = {
+      currentUser: null,
+    };
+  }
+  unsubscribeFromAuth = null;
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+      this.setState({ currentUser: user });
+    });
+  }
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <Router>
+        <Navbar currentUser={this.state.currentUser} />
+
+        <div className="App">
+          <Switch>
+            <Route exact path="/" component={Homepage} />
+            <Route exact path="/shop" component={ShopPage} />
+            <Route exact path="/sign" component={SignInAndOut} />
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
