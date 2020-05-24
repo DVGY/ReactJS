@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import './navbar.scss';
+import { createStructuredSelector } from 'reselect';
+import { selectCartHidden } from '../../redux/cart/cartSelector';
+import { selectCurrentUser } from '../../redux/user/userSelector';
 import { auth } from '../firebase/firebaseUtility';
 import { connect } from 'react-redux';
 import CartIcon from '../cart-icon/CartIcon';
@@ -39,9 +42,15 @@ const Navbar = ({ currentUser, hidden }) => {
 };
 
 //this state is top level root reducer so inside rootReducer we have key user ,access it and make it availabe to Navbar Component
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden,
+// const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+//   currentUser,
+//   hidden,
+// });
+
+/**Channging abpve to this */
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 
 export default connect(mapStateToProps)(Navbar);
