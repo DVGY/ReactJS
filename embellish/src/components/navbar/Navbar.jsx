@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import './navbar.scss';
 import { auth } from '../firebase/firebaseUtility';
+import { connect } from 'react-redux';
+
+//This currentUser prop is coming from the state.someSlice
 const Navbar = ({ currentUser }) => {
   return (
     <div className="navbar">
@@ -32,4 +35,9 @@ const Navbar = ({ currentUser }) => {
   );
 };
 
-export default Navbar;
+//this state is top level root reducer so inside rootReducer we have key user ,access it and make it availabe to Navbar Component
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(Navbar);
