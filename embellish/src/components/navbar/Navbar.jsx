@@ -4,7 +4,8 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import './navbar.scss';
 import { auth } from '../firebase/firebaseUtility';
 import { connect } from 'react-redux';
-
+import CartIcon from '../cart-icon/CartIcon';
+import CartDropdown from '../cart-dropdown/CartDropdown';
 //This currentUser prop is coming from the state.someSlice
 const Navbar = ({ currentUser }) => {
   return (
@@ -30,7 +31,9 @@ const Navbar = ({ currentUser }) => {
             SING IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      <CartDropdown />
     </div>
   );
 };
