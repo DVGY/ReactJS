@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import CartIcon from '../cart-icon/CartIcon';
 import CartDropdown from '../cart-dropdown/CartDropdown';
 //This currentUser prop is coming from the state.someSlice
-const Navbar = ({ currentUser }) => {
+const Navbar = ({ currentUser, hidden }) => {
   return (
     <div className="navbar">
       <Link className="logo-container" to="/">
@@ -33,14 +33,15 @@ const Navbar = ({ currentUser }) => {
         )}
         <CartIcon />
       </div>
-      <CartDropdown />
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };
 
 //this state is top level root reducer so inside rootReducer we have key user ,access it and make it availabe to Navbar Component
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden,
 });
 
 export default connect(mapStateToProps)(Navbar);
