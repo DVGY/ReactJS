@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import CollectionOverview from '../../components/collections-overview/CollectionOverview';
 import CollectionPage from '../collection/CollectionPage';
-
 const ShopPage = ({ match }) => {
   /** ${match{}= /shop */
   console.log('Inside Shop');

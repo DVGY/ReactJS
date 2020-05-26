@@ -3,14 +3,21 @@ import React from 'react';
 import './collection-page.scss';
 import { connect } from 'react-redux';
 import { selectShopCollectionID } from '../../redux/shop/shopSelector';
+import CollectionItems from '../../components/collection-item/CollectionItems';
 
 const CollectionPage = ({ collectionCategory, match }) => {
   /** match.params.categoryId = hats or sneakers or etx */
   console.log('Inside Collections');
   console.log({ match });
+  const { title, items } = collectionCategory;
   return (
     <div className="collection-page">
-      <h2>Collection Page</h2>
+      <h2 className="title">{title}</h2>
+      <div className="items">
+        {items.map((item) => (
+          <CollectionItems key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   );
 };
