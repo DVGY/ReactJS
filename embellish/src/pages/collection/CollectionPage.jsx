@@ -7,8 +7,7 @@ import CollectionItems from '../../components/collection-item/CollectionItems';
 
 const CollectionPage = ({ collectionCategory, match }) => {
   /** match.params.categoryId = hats or sneakers or etx */
-  console.log('Inside Collections');
-  console.log({ match });
+
   const { title, items } = collectionCategory;
   return (
     <div className="collection-page">
@@ -23,8 +22,6 @@ const CollectionPage = ({ collectionCategory, match }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps.match.params.collectionId);
-
   return {
     collectionCategory: selectShopCollectionID(
       ownProps.match.params.collectionId
