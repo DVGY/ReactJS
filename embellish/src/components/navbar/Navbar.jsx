@@ -1,43 +1,49 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import CartDropdown from '../cart-dropdown/CartDropdown';
+import CartIcon from '../cart-icon/CartIcon';
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionLink,
+} from './navbar-style';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
-import './navbar.scss';
 import { createStructuredSelector } from 'reselect';
 import { selectCartHidden } from '../../redux/cart/cartSelector';
 import { selectCurrentUser } from '../../redux/user/userSelector';
 import { auth } from '../firebase/firebaseUtility';
 import { connect } from 'react-redux';
-import CartIcon from '../cart-icon/CartIcon';
-import CartDropdown from '../cart-dropdown/CartDropdown';
 //This currentUser prop is coming from the state.someSlice
 const Navbar = ({ currentUser, hidden }) => {
   return (
-    <div className="navbar">
-      <Link className="logo-container" to="/">
+    <HeaderContainer>
+      <LogoContainer to="/">
         <Logo className="logo" />
-      </Link>
+      </LogoContainer>
 
-      <div className="options">
-        <Link className="option" to="/shop">
-          SHOP
-        </Link>
-        <Link className="option" to="/contact">
+      <OptionsContainer>
+        <OptionLink to="/shop">SHOP</OptionLink>
+        <OptionLink className="option" to="/contact">
           CONTACT
-        </Link>
+        </OptionLink>
 
         {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>
+          <OptionLink
+            as="div"
+            className="option"
+            onClick={() => auth.signOut()}
+          >
             SIGN OUT
-          </div>
+          </OptionLink>
         ) : (
-          <Link className="option" to="/sign">
+          <OptionLink className="option" to="/sign">
             SING IN
-          </Link>
+          </OptionLink>
         )}
         <CartIcon />
-      </div>
+      </OptionsContainer>
       {hidden ? null : <CartDropdown />}
-    </div>
+    </HeaderContainer>
   );
 };
 

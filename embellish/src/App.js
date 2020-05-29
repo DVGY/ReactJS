@@ -6,7 +6,7 @@ import CheckoutPage from './pages/checkout/CheckoutPage';
 import SignInAndOut from './pages/sign-in-up/SignInAndOut';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/userSelector';
-
+// import { selectCollectionForPreview } from './redux/shop/shopSelector';
 import {
   BrowserRouter as Router,
   Route,
@@ -20,13 +20,15 @@ import { setCurrentUser } from './redux/user/actions';
 import {
   auth,
   createUserProfileDoc,
+  // addCollectionAndDocuments,
 } from './components/firebase/firebaseUtility';
 
 import './App.css';
 class App extends React.Component {
   unsubscribeFromAuth = null;
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, collectionsArray } = this.props;
+    console.log(collectionsArray);
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       // create the profile and update state
       if (userAuth) {
@@ -40,6 +42,10 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
+      // addCollectionAndDocuments(
+      //   'collections',
+      //   collectionsArray.map(({ title, items }) => ({ title, items }))
+      // );
     });
   }
   componentWillUnmount() {
@@ -76,6 +82,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  // collectionsArray: selectCollectionForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({

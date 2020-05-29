@@ -43,4 +43,42 @@ export const createUserProfileDoc = async (userAuth, additionalData) => {
   return userRef;
 };
 
+/** Get data from snapshot  and add routeURL also convert form array type to object type*/
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  return transformedCollection.reduce((acc, collection) => {
+    acc[collection.title.toLowerCase()] = collection;
+    return acc;
+  }, {});
+};
 export default firebase;
+
+/**Add shop data using program */
+// export const addCollectionAndDocuments = async (
+//   collectionKey,
+//   objectsToAdd
+// ) => {
+//   const collectionRef = firestore.collection(collectionKey);
+//   /**Collection snapshot gives us back an array of documents objects inside docs key*/
+//   // const collectionSnapshot = collectionRef.get();
+
+//   const batch = firestore.batch();
+
+//   objectsToAdd.forEach((obj) => {
+//     const newDocRef = collectionRef.doc();
+//     // Create a empty docs (with unique id) inside the collection
+//     batch.set(newDocRef, obj);
+//   });
+//   return await batch.commit();
+// };
