@@ -4,7 +4,8 @@ const initialState = {
 };
 
 const shopReducer = (state = initialState, action) => {
-  switch (action.types) {
+  console.log('Inside reducer');
+  switch (action.type) {
     case shopTypes.UPDATE_COLLECTIONS:
       return {
         ...state,

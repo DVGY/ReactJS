@@ -24,16 +24,16 @@ class ShopPage extends React.Component {
     const { updateCollections } = this.props;
     const collectionRef = firestore.collection('collections');
 
-    this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
-      async (snapshot) => {
-        /** snapshot return array of doc*/
-        const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-        console.log(collectionsMap);
-        updateCollections(collectionsMap);
+    /** This is oberserable / observer pattern Lets change it into async await */
+    // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
+    collectionRef.get().then((snapshot) => {
+      /** snapshot return array of doc*/
+      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+      console.log(collectionsMap);
+      updateCollections(collectionsMap);
 
-        this.setState({ isLoading: false });
-      }
-    );
+      this.setState({ isLoading: false });
+    });
   }
 
   render() {
@@ -59,8 +59,11 @@ class ShopPage extends React.Component {
     );
   }
 }
-const mapDispatchToProps = (dispatch) => ({
-  updateCollections: (collectionsMap) =>
-    dispatch(updateCollections(collectionsMap)),
-});
+const mapDispatchToProps = (dispatch) => {
+  console.log('Inside map dispathc collection map');
+  return {
+    updateCollections: (collectionsMap) =>
+      dispatch(updateCollections(collectionsMap)),
+  };
+};
 export default connect(null, mapDispatchToProps)(ShopPage);
