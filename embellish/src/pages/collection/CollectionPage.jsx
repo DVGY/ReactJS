@@ -21,11 +21,9 @@ const CollectionPage = ({ collectionCategory, match }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    collectionCategory: selectShopCollectionID(
-      ownProps.match.params.collectionId
-    )(state),
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  collectionCategory: selectShopCollectionID(
+    ownProps.match.params.collectionId
+  )(state),
+});
 export default connect(mapStateToProps)(CollectionPage);
