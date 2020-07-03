@@ -7,11 +7,30 @@
     margin: 0 auto 30px;
   }
 
+  @media screen and (max-width: 800px) {
+    font-size: 32px;
+    margin: 0 auto 25px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
+    margin: 0 auto 20px;
+  }
+
   .items {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
+    @media screen and (max-width: 800px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
 
+    @media screen and (max-width: 500px) {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
     & .collection-item {
       margin-bottom: 30px;
     }
