@@ -5,13 +5,18 @@ export const HeaderContainer = styled.div`
   height: 70px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-bottom: 25px;
 
   @media screen and (max-width: 800px) {
     height: 60px;
     padding: 10px;
     margin-bottom: 20px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    padding: 2.5px;
+    font-size: 12px;
   }
 `;
 
@@ -24,6 +29,10 @@ export const LogoContainer = styled(Link)`
     width: 50px;
     padding: 0;
   }
+
+  @media only screen and (max-width: 500px) {
+    width: 35px;
+  }
 `;
 
 export const OptionsContainer = styled.div`
@@ -35,6 +44,10 @@ export const OptionsContainer = styled.div`
 
   @media screen and (max-width: 800px) {
     width: 80%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    width: 90%;
   }
 `;
 
