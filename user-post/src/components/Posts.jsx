@@ -41,6 +41,21 @@ const Posts = ({ getPosts, posts, isLoading }) => {
           )}
         </AutoSizer>
       </div>
+
+      {/**<List
+              width={width}
+              height={height}
+              rowHeight={50}
+              rowCount={posts.length}
+              rowRenderer={({ index, key, style, parent }) => {
+                const post = posts[index];
+                return (
+                  <PostItem post={post} index={index} key={key} style={style} />
+                );
+              }}
+            >
+              {console.log(width, height)}
+            </List> */}
     </React.Fragment>
   );
 };
