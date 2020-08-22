@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card, Icon, Grid } from 'semantic-ui-react';
 
 import './post-item-style.css';
 
@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 
 const PostItem = ({
   index,
-  style,
   post,
   likedAndDislikedPost,
   likePost,
@@ -25,7 +24,7 @@ const PostItem = ({
   };
 
   return (
-    <Card style={style}>
+    <Card className="align-center-m-auto ">
       <Card.Content>
         <div className="card-overlay">
           <h1 className="card-overlay__title">POST</h1>
