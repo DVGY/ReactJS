@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import PostItem from './PostItem';
 
 import { connect } from 'react-redux';
@@ -10,19 +10,12 @@ import {
 } from '../redux/post/postSelector';
 import { createStructuredSelector } from 'reselect';
 
-import { Icon } from 'semantic-ui-react';
-
-import {
-  List,
-  AutoSizer,
-  CellMeasurer,
-  CellMeasurerCache,
-} from 'react-virtualized';
+import { Icon, Grid } from 'semantic-ui-react';
+import Pagination from './Pagination';
 
 const Posts = ({ getPosts, posts, isLoading, likedAndDislikedPost }) => {
-  const cache = useRef(
-    new CellMeasurerCache({ fixedWidth: true, defaultHeight: 400 })
-  );
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(6);
 
   useEffect(() => {
     /** Call API */
@@ -30,47 +23,36 @@ const Posts = ({ getPosts, posts, isLoading, likedAndDislikedPost }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <React.Fragment>
       {isLoading && <Icon loading name="spinner" size="huge" />}
-      {!isLoading && (
-        <div style={{ width: '320px', height: '90vh', margin: '0 auto' }}>
-          <AutoSizer>
-            {(size) => (
-              <List
-                width={size.width}
-                height={size.height}
-                rowHeight={cache.current.defaultHeight}
-                deferredMeasurementCache={cache.current}
-                rowCount={posts.length}
-                rowRenderer={({ index, key, style, parent }) => {
-                  const post = posts[index];
-                  return (
-                    <CellMeasurer
-                      key={key}
-                      cache={cache.current}
-                      parent={parent}
-                      columnIndex={0}
-                      rowIndex={index}
-                    >
-                      <PostItem
-                        post={post}
-                        index={index}
-                        style={style}
-                        likedAndDislikedPost={
-                          likedAndDislikedPost
-                            ? likedAndDislikedPost[index]
-                            : null
-                        }
-                      />
-                    </CellMeasurer>
-                  );
-                }}
-              ></List>
-            )}
-          </AutoSizer>
-        </div>
-      )}
+      <Grid divided="vertically">
+        <Grid.Row>
+          {!isLoading &&
+            currentPosts.map((post, index) => (
+              <PostItem
+                post={post}
+                key={post.id}
+                index={index}
+                likedAndDislikedPost={
+                  likedAndDislikedPost ? likedAndDislikedPost[index] : null
+                }
+              />
+            ))}
+        </Grid.Row>
+      </Grid>
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts.length}
+        paginate={paginate}
+      />
     </React.Fragment>
   );
 };

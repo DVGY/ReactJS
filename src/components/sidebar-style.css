@@ -1,7 +1,14 @@
 .sidebar__custom {
   height: 90vh !important;
 }
-
+@media only screen and (max-width: 1920px) {
+  .align-center-m-auto {
+    margin: 0 0.5rem !important;
+  }
+  .pushable > .pusher {
+    padding-left: 12rem !important;
+  }
+}
 @media only screen and (max-width: 600px) {
   .sidebar__custom-vl {
     /* display: none !important; */
@@ -20,9 +27,11 @@
     right: 0;
     height: unset !important;
     justify-content: center;
+    position: sticky !important;
   }
   .pushable > .pusher {
     padding-top: 6rem !important;
+    padding-left: 0rem !important;
   }
   .ui.thin.left.sidebar,
   .ui.thin.right.sidebar {
