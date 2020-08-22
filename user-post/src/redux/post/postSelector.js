@@ -12,6 +12,14 @@ export const selectLikedAndDislikedPost = createSelector(
   [selectPost],
   (post) => post.likedAndDislikedPost
 );
+export const selectDeletedPost = createSelector(
+  [selectPost],
+  (post) => post.deletedPost
+);
+export const selectUpdatedPost = createSelector(
+  [selectPost],
+  (post) => post.updatedPost
+);
 
 // export const selectCreatedPost =
 //   (createSelector[selectPost], (post) => post.createdPost);

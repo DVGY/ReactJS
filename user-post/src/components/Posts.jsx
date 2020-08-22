@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PostItem from './PostItem';
+import SearchBar from './SearchBar';
 
 import { connect } from 'react-redux';
 import { getPosts } from '../redux/post/postActions';
@@ -37,7 +38,7 @@ const Posts = ({ getPosts, posts, isLoading, likedAndDislikedPost }) => {
       {isLoading && <Icon loading name="spinner" size="huge" />}
       {console.log(likedAndDislikedPost)}
       {!isLoading && (
-        <div style={{ width: '320px', height: '90vh' }}>
+        <div style={{ width: '320px', height: '90vh', margin: '0 auto' }}>
           <AutoSizer>
             {(size) => (
               <List
@@ -46,6 +47,7 @@ const Posts = ({ getPosts, posts, isLoading, likedAndDislikedPost }) => {
                 rowHeight={cache.current.defaultHeight}
                 deferredMeasurementCache={cache.current}
                 rowCount={posts.length}
+                overscanRowCount={1}
                 rowRenderer={({ index, key, style, parent }) => {
                   const post = posts[index];
                   return (

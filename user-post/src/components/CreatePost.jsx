@@ -35,9 +35,9 @@ const CreatePost = ({ createdPost, createPost }) => {
               fluid
               label="Title"
               placeholder="Post Title...."
-              width={8}
               onChange={handleChange}
               name="title"
+              width={10}
               value={title}
             />
           </Form.Group>
@@ -45,9 +45,9 @@ const CreatePost = ({ createdPost, createPost }) => {
           <Form.TextArea
             label="Post"
             placeholder="Tell us what do you feel....."
-            width={8}
             className="align-center-m-auto"
             onChange={handleChange}
+            width={10}
             name="post"
             value={post}
           />

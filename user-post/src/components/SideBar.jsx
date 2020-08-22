@@ -5,8 +5,11 @@ import Posts from './Posts';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { Icon, Menu, Segment, Sidebar, Container } from 'semantic-ui-react';
 
-import './sidebar-style.css';
 import CreatePost from './CreatePost';
+import DeletePost from './DeletePost';
+import UpdatePost from './UpdatePost';
+
+import './sidebar-style.css';
 
 const SideBar = () => {
   return (
@@ -16,12 +19,13 @@ const SideBar = () => {
           <Sidebar
             as={Menu}
             animation="push"
-            direction="left"
+            direction="overlay"
             icon="labeled"
             inverted
             vertical
             visible
             width="thin"
+            className="sidebar__custom-vl"
           >
             <Menu.Item as={Link} to="/">
               <Icon name="home" />
@@ -35,14 +39,6 @@ const SideBar = () => {
               <Icon name="plus square" />
               Create Post
             </Menu.Item>
-            <Menu.Item as={Link} to="/delete-post">
-              <Icon name="delete" />
-              Delete Post
-            </Menu.Item>
-            <Menu.Item as={Link} to="/update-post">
-              <Icon name="upload" />
-              Update Post
-            </Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher>
@@ -51,6 +47,8 @@ const SideBar = () => {
                 <Route exact path="/" component={HomePage} />
                 <Route path="/posts" component={Posts} />
                 <Route path="/create-post" component={CreatePost} />
+                <Route path="/delete-post" component={DeletePost} />
+                <Route path="/update-post" component={UpdatePost} />
               </Switch>
             </Container>
           </Sidebar.Pusher>

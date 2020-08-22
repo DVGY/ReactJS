@@ -36,6 +36,10 @@
 .fs-icon-md:hover.upload {
   color: #cfa84e;
 }
+.ui.search > .results {
+  left: 50% !important;
+  transform: translateX(-50%);
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

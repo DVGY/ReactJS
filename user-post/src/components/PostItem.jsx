@@ -5,22 +5,20 @@ import './post-item-style.css';
 
 import { likePost, dislikePost } from '../redux/post/postActions';
 import { connect } from 'react-redux';
-//To do
-//1. Format the card
-//2. Make sidebar sticky
-//3. Add padding to search bar
-//4. Add Random Images to diff users
-//5. Make the post description visible
-const handleLike = (index) => {
-  console.log('Inside Like');
-  likePost(index);
-};
-const handleDislike = (index) => {
-  dislikePost(index);
-};
-const PostItem = ({ index, key, style, post }) => {
+
+import { Link } from 'react-router-dom';
+
+const PostItem = ({ index, style, post }) => {
+  const handleLike = (index) => {
+    console.log('Inside Like');
+    likePost(index);
+  };
+  const handleDislike = (index) => {
+    dislikePost(index);
+  };
+
   return (
-    <Card style={style} key={key} index={index}>
+    <Card style={style}>
       {console.log('PostItem Rendering')}
       <Card.Content>
         <div className="card-overlay">
@@ -50,8 +48,12 @@ const PostItem = ({ index, key, style, post }) => {
           name="heartbeat"
           className="mr-1 fs-icon-md"
         />
-        <Icon circular link name="delete" className="mr-1  fs-icon-md" />
-        <Icon circular link name="upload" className="fs-icon-md" />
+        <Link to={{ pathname: '/delete-post', post: post }}>
+          <Icon circular link name="delete" className="mr-1  fs-icon-md" />
+        </Link>
+        <Link to={{ pathname: '/update-post', post: post }}>
+          <Icon circular link name="upload" className="fs-icon-md" />
+        </Link>
       </Card.Content>
     </Card>
   );

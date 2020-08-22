@@ -1,3 +1,26 @@
 .sidebar__custom {
   height: 90vh !important;
 }
+
+@media only screen and (max-width: 500px) {
+  .sidebar__custom-vl {
+    /* display: none !important; */
+  }
+
+  .pusher > .ui.container {
+    margin: 0 0 !important;
+  }
+  .ui.vertical.menu {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+  .pushable > .ui.sidebar {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: unset !important;
+  }
+  .pushable > .pusher {
+    padding-top: 6rem  !important;
+  }
+}

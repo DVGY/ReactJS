@@ -3,6 +3,8 @@ import postTypes from './postTypes';
 const INITIAL_STATE = {
   posts: [],
   createdPost: null,
+  deletedPost: null,
+  updatedPost: null,
   loading: true,
   error: null,
   likedAndDisLikedPost: null,
@@ -12,6 +14,8 @@ export const postReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case postTypes.GET_POSTS_START:
     case postTypes.CREATE_POSTS_START:
+    case postTypes.DELETE_POST_START:
+    case postTypes.UPDATE_POST_START:
       return {
         ...state,
       };
@@ -27,9 +31,20 @@ export const postReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         createdPost: action.payload,
       };
-
+    case postTypes.DELETE_POST_SUCCESS:
+      return {
+        ...state,
+        deletedPost: true,
+      };
+    case postTypes.UPDATE_POST_SUCCESS:
+      return {
+        ...state,
+        updatedPost: action.payload,
+      };
     case postTypes.GET_POSTS_FAIL:
     case postTypes.CREATE_POSTS_FAIL:
+    case postTypes.DELETE_POST_FAIL:
+    case postTypes.UPDATE_POST_FAIL:
       return {
         ...state,
         loading: false,
@@ -42,7 +57,6 @@ export const postReducer = (state = INITIAL_STATE, action) => {
           ...state.likedAndDisLikedPost,
           [action.payload]: { like: true, dislike: false },
         },
-        clg: console.log(action.payload),
       };
     case postTypes.DISLIKE_POST:
       return {
