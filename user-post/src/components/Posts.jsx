@@ -32,8 +32,6 @@ const Posts = ({ getPosts, posts, isLoading, likedAndDislikedPost }) => {
 
   return (
     <React.Fragment>
-      {console.log('Posts Rendering')}
-
       {isLoading && <Icon loading name="spinner" size="huge" />}
       {!isLoading && (
         <div style={{ width: '320px', height: '90vh', margin: '0 auto' }}>

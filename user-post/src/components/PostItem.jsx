@@ -26,7 +26,6 @@ const PostItem = ({
 
   return (
     <Card style={style}>
-      {console.log('PostItem Rendering')}
       <Card.Content>
         <div className="card-overlay">
           <h1 className="card-overlay__title">POST</h1>
