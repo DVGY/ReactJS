@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card, Icon, Button } from 'semantic-ui-react';
 
 import './post-item-style.css';
 
@@ -8,7 +8,14 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-const PostItem = ({ index, style, post }) => {
+const PostItem = ({
+  index,
+  style,
+  post,
+  likedAndDislikedPost,
+  likePost,
+  dislikePost,
+}) => {
   const handleLike = (index) => {
     console.log('Inside Like');
     likePost(index);
@@ -35,17 +42,25 @@ const PostItem = ({ index, style, post }) => {
       <Card.Content extra>
         <Icon
           circular
-          onClick={() => handleLike(index)}
           link
+          onClick={() => handleLike(index)}
           name="heart"
           className="mr-1 fs-icon-md"
-          color="teal"
+          // color={
+          //   likedAndDislikedPost
+          //     ? likedAndDislikedPost[index]['like']
+          //       ? 'red'
+          //       : 'gray'
+          //     : 'grey'
+          // }
         ></Icon>
+        {console.log(likedAndDislikedPost)}
         <Icon
           circular
-          onClick={() => handleDislike(index)}
           link
           name="heartbeat"
+          onClick={() => handleDislike(index)}
+          // color={likedAndDislikedPost[index]['dislike'] ? 'red' : 'grey'}
           className="mr-1 fs-icon-md"
         />
         <Link to={{ pathname: '/delete-post', post: post }}>

@@ -2,7 +2,7 @@
   height: 90vh !important;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   .sidebar__custom-vl {
     /* display: none !important; */
   }
@@ -19,8 +19,13 @@
     left: 0;
     right: 0;
     height: unset !important;
+    justify-content: center;
   }
   .pushable > .pusher {
-    padding-top: 6rem  !important;
+    padding-top: 6rem !important;
+  }
+  .ui.thin.left.sidebar,
+  .ui.thin.right.sidebar {
+    width: 100% !important;
   }
 }

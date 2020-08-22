@@ -18,8 +18,8 @@ const SideBar = () => {
         <Sidebar.Pushable as={Segment} className="sidebar__custom">
           <Sidebar
             as={Menu}
-            animation="push"
-            direction="overlay"
+            animation="overlay"
+            direction="left"
             icon="labeled"
             inverted
             vertical

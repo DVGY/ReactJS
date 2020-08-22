@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import PostItem from './PostItem';
-import SearchBar from './SearchBar';
 
 import { connect } from 'react-redux';
 import { getPosts } from '../redux/post/postActions';
@@ -36,7 +35,6 @@ const Posts = ({ getPosts, posts, isLoading, likedAndDislikedPost }) => {
       {console.log('Posts Rendering')}
 
       {isLoading && <Icon loading name="spinner" size="huge" />}
-      {console.log(likedAndDislikedPost)}
       {!isLoading && (
         <div style={{ width: '320px', height: '90vh', margin: '0 auto' }}>
           <AutoSizer>
@@ -58,7 +56,18 @@ const Posts = ({ getPosts, posts, isLoading, likedAndDislikedPost }) => {
                       columnIndex={0}
                       rowIndex={index}
                     >
-                      <PostItem post={post} index={index} style={style} />
+                      {console.log(likedAndDislikedPost)}
+
+                      <PostItem
+                        post={post}
+                        index={index}
+                        style={style}
+                        likedAndDislikedPost={
+                          likedAndDislikedPost
+                            ? likedAndDislikedPost[index]
+                            : null
+                        }
+                      />
                     </CellMeasurer>
                   );
                 }}
