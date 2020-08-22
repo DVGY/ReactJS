@@ -45,7 +45,6 @@ const Posts = ({ getPosts, posts, isLoading, likedAndDislikedPost }) => {
                 rowHeight={cache.current.defaultHeight}
                 deferredMeasurementCache={cache.current}
                 rowCount={posts.length}
-                overscanRowCount={1}
                 rowRenderer={({ index, key, style, parent }) => {
                   const post = posts[index];
                   return (
@@ -56,8 +55,6 @@ const Posts = ({ getPosts, posts, isLoading, likedAndDislikedPost }) => {
                       columnIndex={0}
                       rowIndex={index}
                     >
-                      {console.log(likedAndDislikedPost)}
-
                       <PostItem
                         post={post}
                         index={index}

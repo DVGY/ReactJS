@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { Card, Button, Message } from 'semantic-ui-react';
+import { Card, Button, Message, Menu, Icon } from 'semantic-ui-react';
 
 import { deletePost } from '../redux/post/postActions';
 import { selectDeletedPost } from '../redux/post/postSelector';
 import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -14,11 +15,12 @@ const DeletePost = ({ deletePost, location, deletedPost }) => {
 
   return (
     <React.Fragment>
-      {(deletedPost && (
+      {deletedPost && (
         <Message positive>
           <Message.Header>Post deleted Successfully</Message.Header>
         </Message>
-      )) || (
+      )}
+      {(post && !deletedPost && (
         <Card className="align-center-m-auto">
           <Card.Content>
             <div className="card-overlay">
@@ -37,6 +39,11 @@ const DeletePost = ({ deletePost, location, deletedPost }) => {
             </Button>
           </Card.Content>
         </Card>
+      )) || (
+        <Menu.Item as={Link} to="/posts">
+          <Icon name="address card" />
+          Posts
+        </Menu.Item>
       )}
     </React.Fragment>
   );

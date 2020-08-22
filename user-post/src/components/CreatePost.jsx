@@ -27,7 +27,6 @@ const CreatePost = ({ createdPost, createPost }) => {
 
   return (
     <Container style={{ paddingTop: '2rem' }}>
-      {console.log(createdPost)}
       <Grid.Row>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="create-post">

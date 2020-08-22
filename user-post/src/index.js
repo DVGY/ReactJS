@@ -6,15 +6,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { store, persistor } from './redux/store';
 import { Provider } from 'react-redux';
-// import { PersistGate } from 'redux-persist/integration/react';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import 'semantic-ui-css/semantic.min.css';
 ReactDOM.render(
   <Provider store={store}>
     {/*<React.StrictMode>*/}
-    {/*<PersistGate persistor={persistor}>*/}
-    <App />
-    {/*   </PersistGate>*/}
+    <PersistGate persistor={persistor}>
+      <App />
+    </PersistGate>
     {/* </React.StrictMode>*/}
   </Provider>,
   document.getElementById('root')

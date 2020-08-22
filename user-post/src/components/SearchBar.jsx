@@ -37,7 +37,6 @@ const SearchBar = ({ posts }) => {
         resultRenderer={resultRenderer}
         value={searchValue}
         results={searchResult}
-        resultRenderer={resultRenderer}
         name="search"
       />
     </React.Fragment>

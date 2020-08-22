@@ -50,7 +50,6 @@ export const updatePostsFail = (error) => ({
 });
 
 export const likePost = (index) => {
-  console.log('Indise Like Action');
   return {
     type: postTypes.LIKE_POST,
     payload: index,
@@ -92,10 +91,7 @@ export const createPost = (title, post) => async (dispatch) => {
 export const deletePost = (index) => async (dispatch) => {
   try {
     dispatch(deletePostsStart());
-    const response = await axios.delete(
-      `https://jsonplaceholder.typicode.com/posts/${index}`
-    );
-    console.log(response);
+    await axios.delete(`https://jsonplaceholder.typicode.com/posts/${index}`);
     dispatch(deletePostsSuccess());
   } catch (error) {
     dispatch(deletePostsFail(error.response));
@@ -104,14 +100,12 @@ export const deletePost = (index) => async (dispatch) => {
 
 export const updatePost = (index, title, feed) => async (dispatch) => {
   const body = { index, title, feed };
-  console.log('inside pdateu');
   try {
     dispatch(updatePostsStart());
     const response = await axios.put(
       `https://jsonplaceholder.typicode.com/posts/${index}`,
       body
     );
-    console.log(response);
     dispatch(updatePostsSuccess(response.data));
   } catch (error) {
     dispatch(updatePostsFail(error.response));

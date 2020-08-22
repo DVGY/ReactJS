@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Button } from 'semantic-ui-react';
+import { Card, Icon } from 'semantic-ui-react';
 
 import './post-item-style.css';
 
@@ -46,21 +46,27 @@ const PostItem = ({
           onClick={() => handleLike(index)}
           name="heart"
           className="mr-1 fs-icon-md"
-          // color={
-          //   likedAndDislikedPost
-          //     ? likedAndDislikedPost[index]['like']
-          //       ? 'red'
-          //       : 'gray'
-          //     : 'grey'
-          // }
+          color={
+            likedAndDislikedPost
+              ? likedAndDislikedPost.like
+                ? 'red'
+                : 'grey'
+              : 'grey'
+          }
         ></Icon>
-        {console.log(likedAndDislikedPost)}
+
         <Icon
           circular
           link
           name="heartbeat"
           onClick={() => handleDislike(index)}
-          // color={likedAndDislikedPost[index]['dislike'] ? 'red' : 'grey'}
+          color={
+            likedAndDislikedPost
+              ? likedAndDislikedPost.dislike
+                ? 'red'
+                : 'grey'
+              : 'grey'
+          }
           className="mr-1 fs-icon-md"
         />
         <Link to={{ pathname: '/delete-post', post: post }}>

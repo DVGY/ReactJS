@@ -51,15 +51,15 @@ export const postReducer = (state = INITIAL_STATE, action) => {
         error: action.payload,
       };
     case postTypes.LIKE_POST:
-      console.log('Console.log');
       return {
         ...state,
         loading: false,
-
         likedAndDislikedPost: {
-          ...state.likedAndDisLikedPost,
-
-          [action.payload]: { like: true, dislike: false },
+          ...state.likedAndDislikedPost,
+          [`${action.payload}`]: {
+            like: true,
+            dislike: false,
+          },
         },
       };
     case postTypes.DISLIKE_POST:
@@ -68,6 +68,7 @@ export const postReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         likedAndDislikedPost: {
           ...state.likedAndDislikedPost,
+
           [`${action.payload}`]: { like: false, dislike: true },
         },
       };

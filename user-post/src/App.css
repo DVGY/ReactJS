@@ -24,12 +24,12 @@
 .fs-icon-md {
   font-size: 1.5em !important;
 }
-.fs-icon-md:hover.heart {
+/* .fs-icon-md:hover.heart {
   color: #7f1734;
 }
 .fs-icon-md:hover.heartbeat {
   color: #eeb1c2;
-}
+} */
 .fs-icon-md:hover.delete {
   color: #cfa84e;
 }
