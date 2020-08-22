@@ -1,0 +1,8 @@
+.create-post {
+  display: flex;
+  flex-direction: column !important;
+  align-items: center;
+}
+.align-center-m-auto {
+  margin: 0 auto !important;
+}
