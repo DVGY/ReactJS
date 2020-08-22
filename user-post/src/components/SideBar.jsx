@@ -3,9 +3,10 @@ import HomePage from './HomePage';
 import Posts from './Posts';
 
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import { Icon, Menu, Segment, Sidebar } from 'semantic-ui-react';
+import { Icon, Menu, Segment, Sidebar, Container } from 'semantic-ui-react';
 
 import './sidebar-style.css';
+import CreatePost from './CreatePost';
 
 const SideBar = () => {
   return (
@@ -14,7 +15,8 @@ const SideBar = () => {
         <Sidebar.Pushable as={Segment} className="sidebar__custom">
           <Sidebar
             as={Menu}
-            animation="overlay"
+            animation="push"
+            direction="left"
             icon="labeled"
             inverted
             vertical
@@ -44,10 +46,13 @@ const SideBar = () => {
           </Sidebar>
 
           <Sidebar.Pusher>
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/posts" component={Posts} />
-            </Switch>
+            <Container>
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/posts" component={Posts} />
+                <Route path="/create-post" component={CreatePost} />
+              </Switch>
+            </Container>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </Router>

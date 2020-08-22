@@ -1,16 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PostItem from './PostItem';
 
 import { connect } from 'react-redux';
 import { getPosts } from '../redux/post/postActions';
-import { selectPosts, selectLoading } from '../redux/post/postSelector';
+import {
+  selectPosts,
+  selectLoading,
+  selectLikedAndDislikedPost,
+} from '../redux/post/postSelector';
 import { createStructuredSelector } from 'reselect';
 
 import { Icon } from 'semantic-ui-react';
 
-import { List, AutoSizer } from 'react-virtualized';
+import {
+  List,
+  AutoSizer,
+  CellMeasurer,
+  CellMeasurerCache,
+} from 'react-virtualized';
 
-const Posts = ({ getPosts, posts, isLoading }) => {
+const Posts = ({ getPosts, posts, isLoading, likedAndDislikedPost }) => {
+  const cache = useRef(
+    new CellMeasurerCache({ fixedWidth: true, defaultHeight: 400 })
+  );
+
   useEffect(() => {
     /** Call API */
     getPosts();
@@ -19,43 +32,39 @@ const Posts = ({ getPosts, posts, isLoading }) => {
 
   return (
     <React.Fragment>
+      {console.log('Posts Rendering')}
+
       {isLoading && <Icon loading name="spinner" size="huge" />}
-
-      <div style={{ width: '100%', height: '100vh' }}>
-        <AutoSizer>
-          {(width, height) => (
-            <List
-              width={width}
-              height={height}
-              rowHeight={50}
-              rowCount={posts.length}
-              rowRenderer={({ index, key, style, parent }) => {
-                const post = posts[index];
-                return (
-                  <PostItem post={post} index={index} key={key} style={style} />
-                );
-              }}
-            >
-              {console.log(width, height)}
-            </List>
-          )}
-        </AutoSizer>
-      </div>
-
-      {/**<List
-              width={width}
-              height={height}
-              rowHeight={50}
-              rowCount={posts.length}
-              rowRenderer={({ index, key, style, parent }) => {
-                const post = posts[index];
-                return (
-                  <PostItem post={post} index={index} key={key} style={style} />
-                );
-              }}
-            >
-              {console.log(width, height)}
-            </List> */}
+      {console.log(likedAndDislikedPost)}
+      {!isLoading && (
+        <div style={{ width: '320px', height: '90vh' }}>
+          <AutoSizer>
+            {(size) => (
+              <List
+                width={size.width}
+                height={size.height}
+                rowHeight={cache.current.defaultHeight}
+                deferredMeasurementCache={cache.current}
+                rowCount={posts.length}
+                rowRenderer={({ index, key, style, parent }) => {
+                  const post = posts[index];
+                  return (
+                    <CellMeasurer
+                      key={key}
+                      cache={cache.current}
+                      parent={parent}
+                      columnIndex={0}
+                      rowIndex={index}
+                    >
+                      <PostItem post={post} index={index} style={style} />
+                    </CellMeasurer>
+                  );
+                }}
+              ></List>
+            )}
+          </AutoSizer>
+        </div>
+      )}
     </React.Fragment>
   );
 };
@@ -67,5 +76,6 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = createStructuredSelector({
   posts: selectPosts,
   isLoading: selectLoading,
+  likedAndDislikedPost: selectLikedAndDislikedPost,
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

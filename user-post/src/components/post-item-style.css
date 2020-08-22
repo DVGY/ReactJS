@@ -1,0 +1,34 @@
+.card-overlay {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  padding: 2.5rem;
+}
+.card-overlay__title {
+  color: #ffffff;
+}
+.card-overlay__title2 {
+}
+.card-overlay__id {
+  border-radius: 50%;
+  font-size: 1.6rem;
+  background-color: #a777e3;
+  color: white;
+  height: 3.5rem;
+  width: 3.5rem;
+  font-size: 1.6rem !important;
+  background-color: #c1e08f;
+  color: white !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 100px;
+  left: 20px;
+}
+.card-overlay__content-title {
+  color: #6e8efb !important;
+}
+.card-overlay__content {
+  padding-top: 2rem;
+}

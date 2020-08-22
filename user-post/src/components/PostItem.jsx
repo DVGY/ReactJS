@@ -1,38 +1,64 @@
 import React from 'react';
-import { Card, Image, Icon } from 'semantic-ui-react';
+import { Card, Icon } from 'semantic-ui-react';
 
+import './post-item-style.css';
+
+import { likePost, dislikePost } from '../redux/post/postActions';
+import { connect } from 'react-redux';
 //To do
 //1. Format the card
 //2. Make sidebar sticky
 //3. Add padding to search bar
 //4. Add Random Images to diff users
 //5. Make the post description visible
-
+const handleLike = (index) => {
+  console.log('Inside Like');
+  likePost(index);
+};
+const handleDislike = (index) => {
+  dislikePost(index);
+};
 const PostItem = ({ index, key, style, post }) => {
   return (
-    <Card className="grid container" key={key} style={style}>
+    <Card style={style} key={key} index={index}>
+      {console.log('PostItem Rendering')}
       <Card.Content>
-        <div className="header">
-          {' '}
-          <Image
-            floated="left"
-            size="tiny"
-            src="https://api.adorable.io/avatars/80/dejavu.png"
-            circular
-          />
+        <div className="card-overlay">
+          <h1 className="card-overlay__title">POST</h1>
         </div>
-
-        <Card.Header>User ID: {post.userId}</Card.Header>
-        <Card.Description>{post.title}</Card.Description>
+        <Card.Header className="card-overlay__id">{post.userId}</Card.Header>
+        <Card.Description className="card-overlay__content-title">
+          Feed
+        </Card.Description>
+        <Card.Header className="card-overlay__content">
+          {post.title}
+        </Card.Header>
       </Card.Content>
       <Card.Content extra>
-        <div className="">
-          <Icon link name="heart" size="big"></Icon>
-          <Icon link name="heartbeat" size="big"></Icon>
-        </div>
+        <Icon
+          circular
+          onClick={() => handleLike(index)}
+          link
+          name="heart"
+          className="mr-1 fs-icon-md"
+          color="teal"
+        ></Icon>
+        <Icon
+          circular
+          onClick={() => handleDislike(index)}
+          link
+          name="heartbeat"
+          className="mr-1 fs-icon-md"
+        />
+        <Icon circular link name="delete" className="mr-1  fs-icon-md" />
+        <Icon circular link name="upload" className="fs-icon-md" />
       </Card.Content>
     </Card>
   );
 };
+const mapDispatchToProps = (dispatch) => ({
+  likePost: (index) => dispatch(likePost(index)),
+  dislikePost: (index) => dispatch(dislikePost(index)),
+});
 
-export default PostItem;
+export default connect(null, mapDispatchToProps)(PostItem);
