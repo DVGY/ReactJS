@@ -41,7 +41,7 @@
   list-style: none;
   flex-wrap: wrap;
   border-radius: 0.25rem;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .page-link {
   position: relative;

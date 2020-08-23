@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getPosts } from '../redux/post/postActions';
 import { Link } from 'react-router-dom';
 
-import { Icon, Grid, Card } from 'semantic-ui-react';
+import { Icon, Grid, Card, Menu, Button } from 'semantic-ui-react';
 
 import {
   selectPosts,
@@ -21,11 +21,18 @@ const Disliked = ({ getPosts, isLoading, likedAndDislikedPost, posts }) => {
   return (
     <React.Fragment>
       {isLoading && <Icon loading name="spinner" size="huge" />}
+      {!likedAndDislikedPost && (
+        <div>
+          <h3>Dislike some post and return back</h3>
+          <Menu.Item as={Link} to="/posts" className="rm-p mr-sm size-menu">
+            <Button color="teal">Posts</Button>
+          </Menu.Item>
+        </div>
+      )}
       <Grid divided="vertically">
         <Grid.Row>
           {posts
             .filter(function (post, index) {
-              console.log(likedAndDislikedPost[index]);
               return likedAndDislikedPost
                 ? likedAndDislikedPost[index]
                   ? likedAndDislikedPost[index]['dislike']
