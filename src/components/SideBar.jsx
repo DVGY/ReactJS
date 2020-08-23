@@ -8,8 +8,9 @@ import { Icon, Menu, Segment, Sidebar, Container } from 'semantic-ui-react';
 import CreatePost from './CreatePost';
 import DeletePost from './DeletePost';
 import UpdatePost from './UpdatePost';
-
+import LikedPost from './LikedPost';
 import './sidebar-style.css';
+import Disliked from './Disliked';
 
 const SideBar = () => {
   return (
@@ -27,17 +28,37 @@ const SideBar = () => {
             width="thin"
             className="sidebar__custom-vl"
           >
-            <Menu.Item as={Link} to="/">
+            <Menu.Item as={Link} to="/" className="rm-p mr-sm size-menu">
               <Icon name="home" />
               Home
             </Menu.Item>
-            <Menu.Item as={Link} to="/posts">
+            <Menu.Item as={Link} to="/posts" className="rm-p mr-sm size-menu">
               <Icon name="address card" />
               Posts
             </Menu.Item>
-            <Menu.Item as={Link} to="/create-post">
+            <Menu.Item
+              as={Link}
+              to="/create-post"
+              className="rm-p mr-sm size-menu"
+            >
               <Icon name="plus square" />
               Create Post
+            </Menu.Item>
+            <Menu.Item
+              as={Link}
+              to="/liked-post"
+              className="rm-p mr-sm size-menu"
+            >
+              <Icon name="heart" />
+              Liked
+            </Menu.Item>
+            <Menu.Item
+              as={Link}
+              to="/disliked-post"
+              className="rm-p mr-sm size-menu"
+            >
+              <Icon name="heartbeat" />
+              Disliked
             </Menu.Item>
           </Sidebar>
 
@@ -49,6 +70,8 @@ const SideBar = () => {
                 <Route path="/create-post" component={CreatePost} />
                 <Route path="/delete-post" component={DeletePost} />
                 <Route path="/update-post" component={UpdatePost} />
+                <Route path="/liked-post" component={LikedPost} />
+                <Route path="/disliked-post" component={Disliked} />
               </Switch>
             </Container>
           </Sidebar.Pusher>

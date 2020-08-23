@@ -1,6 +1,7 @@
 .sidebar__custom {
   height: 90vh !important;
 }
+
 @media only screen and (max-width: 1920px) {
   .align-center-m-auto {
     margin: 0 0.5rem !important;
@@ -36,5 +37,14 @@
   .ui.thin.left.sidebar,
   .ui.thin.right.sidebar {
     width: 100% !important;
+  }
+  .rm-p {
+    padding: 0 !important;
+  }
+  .size-menu {
+    min-width: 3em !important;
+  }
+  .rm-p {
+    padding: 0 !important;
   }
 }
