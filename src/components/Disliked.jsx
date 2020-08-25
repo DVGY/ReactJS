@@ -72,7 +72,7 @@ const Disliked = ({ getPosts, isLoading, likedAndDislikedPost, posts }) => {
                       className="mr-1 fs-icon-md"
                       color="red"
                     />
-                    <Link to={{ pathname: '/delete-post' }}>
+                    <Link to={{ pathname: '/delete-post', post: post }}>
                       <Icon
                         circular
                         link
@@ -80,7 +80,7 @@ const Disliked = ({ getPosts, isLoading, likedAndDislikedPost, posts }) => {
                         className="mr-1  fs-icon-md"
                       />
                     </Link>
-                    <Link to={{ pathname: '/update-post' }}>
+                    <Link to={{ pathname: '/update-post', post: post }}>
                       <Icon
                         circular
                         link
