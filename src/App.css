@@ -42,6 +42,7 @@
   flex-wrap: wrap;
   border-radius: 0.25rem;
   justify-content: flex-start;
+  cursor: pointer;
 }
 .page-link {
   position: relative;
