@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 10px 30px;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+@media only screen and (max-width: 800px) {
+  body {
+    padding: 5px 7.5px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  body {
+    padding: 5px 7.5px;
+  }
+}
